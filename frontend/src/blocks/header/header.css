@@ -1,0 +1,30 @@
+@import url('./__logo/header__logo.css');
+@import url('./__children/header__children.css');
+@import url('./__email/header__email.css');
+@import url('./__link/header__link.css');
+@import url('./__link/_logout/header__link_logout.css');
+@import url('./__children/_hidden/header__children_hidden.css');
+@import url('./__children/_visible/header__children_visible.css');
+
+.header {
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  max-width: 882px;
+  min-height: 74px;
+  padding: 30px 0 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+@media screen and (max-width: 400px) {
+  .header {
+    flex-direction: column-reverse;
+    max-width: 324px;
+    width: 100%;
+    padding: 0;
+  }
+}

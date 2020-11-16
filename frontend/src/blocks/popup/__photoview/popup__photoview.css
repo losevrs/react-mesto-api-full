@@ -1,0 +1,8 @@
+.popup__photoview {
+  margin: auto;
+  color: white;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+}

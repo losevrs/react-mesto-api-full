@@ -1,0 +1,16 @@
+@import url('./__title/signform__title.css');
+@import url('./__submit/signform__submit.css');
+@import url('./__submit/_disabled/signform__submit_disabled.css');
+@import url('./__input/signform__input.css');
+@import url('./__inputdiv/signform__inputdiv.css');
+@import url('./__link/signform__link.css');
+
+.signform {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 30px;
+  justify-items: center;
+  box-sizing: border-box;
+}

@@ -1,0 +1,25 @@
+@import url('./__lines/burger-button__lines.css');
+@import url('./_active/burger-button_active.css');
+
+.burger-button {
+  position: absolute;
+  display: none;
+  bottom: 27px;
+  right: 21px;
+  z-index: 30;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: black;
+  transition: 0.4s;
+}
+
+@media screen and (max-width: 400px) {
+  .burger-button {
+    display: block;
+  }
+}
+
+.burger-button:hover .burger-button__lines {
+  opacity: 0.6;
+}

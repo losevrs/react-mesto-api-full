@@ -1,0 +1,16 @@
+.signform__link {
+  direction: unset;
+  text-decoration: none;
+  color: white;
+  margin: 0 auto;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.signform__link:hover {
+  cursor: pointer;
+}

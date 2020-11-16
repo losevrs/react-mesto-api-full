@@ -1,0 +1,14 @@
+.photocard__like {
+  width: 24px;
+  height: 24px;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background: transparent url('../../../images/placesphotos/likeoff.jpg') no-repeat center top;
+}
+
+.photocard__like:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+.burger-button__lines,
+.burger-button__lines::after,
+.burger-button__lines::before {
+  position: absolute;
+  width: 24px; 
+  height: 3px;
+  background-color: white;
+}
+
+.burger-button__lines {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.burger-button__lines::before {
+  content: "";
+  top: -9px;
+  left: 0;
+}
+
+.burger-button__lines::after {
+  content: "";
+  top: 9px;
+  left: 0;
+}

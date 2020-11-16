@@ -1,0 +1,20 @@
+.placesphotos {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 47px 30px 0;
+  margin: 0 auto;
+  display: grid;
+  row-gap: 20px;
+  column-gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  align-items: center;
+  justify-items: center;
+}
+
+@media screen and (max-width: 350px) {
+  .placesphotos {
+    padding: 47px 0 0;
+  }
+}
+
+

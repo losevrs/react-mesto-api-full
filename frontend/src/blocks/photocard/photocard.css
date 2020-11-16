@@ -1,0 +1,28 @@
+@import url('./__delete/photocard__delete.css');
+@import url('./__delete/_show/photocard__delete_show.css');
+@import url('./__viewport/photocard__viewport.css');
+@import url('./__description/photocard__description.css');
+@import url('./__placename/photocard__placename.css');
+@import url('./__like/photocard__like.css');
+@import url('./__like/_on/photocard__like_on.css');
+@import url('./__likes/photocard__likes.css');
+@import url('./__count/photocard__count.css');
+
+.photocard {
+  background-color: white;
+  color: #000000;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 282px;
+  width: 282px;
+  max-height: 362px;
+  height: 362px;
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+  position: relative;
+}
+
+.photocard:hover {
+  transform: scale(1.02);
+}
+

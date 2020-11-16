@@ -1,0 +1,16 @@
+.signform__submit {
+  color: black;
+  background-color: white;
+  width: 100%;
+  max-width: 358px;
+  min-height: 50px;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  margin: 216px auto 15px;
+  border-radius: 2px;
+  cursor: pointer;
+}

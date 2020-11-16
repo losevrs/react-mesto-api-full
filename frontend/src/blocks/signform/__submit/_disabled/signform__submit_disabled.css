@@ -1,0 +1,8 @@
+.signform__submit_disabled {
+  opacity: 0.7;
+}
+
+.signform__submit_disabled:hover {
+  opacity: 0.8;
+  cursor: inherit;
+}

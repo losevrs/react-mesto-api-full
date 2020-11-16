@@ -1,0 +1,13 @@
+.popup__submit_disabled {
+  border: 1px solid #000000;
+  background: rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
+  border-radius: 2px;
+  color: #000000;
+  opacity: 0.2;
+}
+
+.popup__submit_disabled:hover {
+  background: rgba(255, 255, 255, 0.8);
+  cursor: inherit;
+}

@@ -1,0 +1,9 @@
+.header__email {
+  color: white;
+}
+
+@media screen and (max-width: 400px) {
+  .header__email {
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,25 @@
+.signform__input {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: white;
+  background-color: black;
+  border: 2px solid #CCCCCC;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  max-width: 358px;
+  width: 100%;
+  padding: 0;
+}
+
+.signform__input::-webkit-input-placeholder {color: #CCCCCC;} /* webkit */
+.signform__input::-moz-placeholder          {color: #CCCCCC;} /* Firefox 19+ */
+.signform__input:-moz-placeholder           {color: #CCCCCC;} /* Firefox 18- */
+.signform__input:-ms-input-placeholder      {color: #CCCCCC;} /* IE */
+.signform__input:focus { 
+  outline: none; 
+  background-color: black;
+}

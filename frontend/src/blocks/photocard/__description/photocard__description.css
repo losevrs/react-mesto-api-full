@@ -1,0 +1,7 @@
+.photocard__description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 246px;
+  margin: 20px 15px 22px 21px;
+}
