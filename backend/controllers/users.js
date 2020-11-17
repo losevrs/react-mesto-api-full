@@ -1,5 +1,14 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = process.env;
+
 const User = require('../models/user');
+
 const { ObjectForError, sendError } = require('../validation/errors');
+
+module.exports.getUser = (req, res) => {
+  res.json(req.user);
+}
 
 module.exports.getUsers = (req, res) => {
   User.find({})
@@ -17,11 +26,14 @@ module.exports.getUserById = (req, res) => {
 };
 
 module.exports.createUser = (req, res) => {
-  const { name, about, avatar } = req.body;
+  const { email, password } = req.body;
 
-  User.create({ name, about, avatar })
-    .then((user) => res.json(user))
-    .catch((error) => sendError(error, res));
+  bcrypt.hash(password, 10)
+    .then((hash) => {
+      User.create({ email, password: hash })
+        .then((user) => res.json(user))
+        .catch((error) => sendError(error, res))
+    });
 };
 
 module.exports.updateUser = (req, res) => {
@@ -55,3 +67,15 @@ module.exports.updateAvatar = (req, res) => {
     .then((user) => res.json(user))
     .catch((error) => sendError(error, res));
 };
+
+module.exports.login = (req, res) => {
+  const { email, password } = req.body;
+
+  return User.findUserByCredentials(email, password)
+    .then((user) => { // All right, Hristofor Bonifat'evich !!!
+      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+      //res.json({ token });
+      res.setHeader('Set-Cookie', `token=${token}; HttpOnly`);
+    })
+    .catch((error) => sendError(error, res));
+}

@@ -17,9 +17,13 @@
     "mongoose": "^5.10.11"
   },
   "devDependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
     "eslint": "^7.10.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
-    "nodemon": "^2.0.4"
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.4",
+    "validator": "^13.1.17"
   }
 }
