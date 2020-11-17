@@ -9,6 +9,7 @@ const cardsRouter = require('./routes/cards');
 
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const { sendError } = require('./validation/errors');
 
 const { PORT = 3000 } = process.env;
 
@@ -38,6 +39,10 @@ app.use(auth);
 
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
+
+app.use((error, req, res, next) => {
+  sendError(error, res);
+});
 
 app.listen(PORT, () => {
   console.log('Listen on port -> ', PORT);

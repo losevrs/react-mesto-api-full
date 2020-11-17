@@ -4,39 +4,39 @@ const { JWT_SECRET } = process.env;
 
 const User = require('../models/user');
 
-const { ObjectForError, sendError } = require('../validation/errors');
+const { ObjectForError } = require('../validation/errors');
 
 module.exports.getUser = (req, res) => {
   res.json(req.user);
 }
 
-module.exports.getUsers = (req, res) => {
+module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.json(users))
-    .catch((error) => sendError(error, res));
+    .catch(next);
 };
 
-module.exports.getUserById = (req, res) => {
+module.exports.getUserById = (req, res, next) => {
   const { id } = req.params;
 
   User.findById(id)
     .orFail(new ObjectForError('ObjectNotFound'))
     .then((user) => res.json(user))
-    .catch((error) => sendError(error, res));
+    .catch(next);
 };
 
-module.exports.createUser = (req, res) => {
+module.exports.createUser = (req, res, next) => {
   const { email, password } = req.body;
 
   bcrypt.hash(password, 10)
     .then((hash) => {
       User.create({ email, password: hash })
         .then((user) => res.json(user))
-        .catch((error) => sendError(error, res))
+        .catch(next)
     });
 };
 
-module.exports.updateUser = (req, res) => {
+module.exports.updateUser = (req, res, next) => {
   const { name, about } = req.body;
 
   User.findByIdAndUpdate(
@@ -49,10 +49,10 @@ module.exports.updateUser = (req, res) => {
   )
     .orFail(new ObjectForError('ObjectNotFound'))
     .then((user) => res.json(user))
-    .catch((error) => sendError(error, res));
+    .catch(next);
 };
 
-module.exports.updateAvatar = (req, res) => {
+module.exports.updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
 
   User.findByIdAndUpdate(
@@ -65,10 +65,10 @@ module.exports.updateAvatar = (req, res) => {
   )
     .orFail(new ObjectForError('ObjectNotFound'))
     .then((user) => res.json(user))
-    .catch((error) => sendError(error, res));
+    .catch(next);
 };
 
-module.exports.login = (req, res) => {
+module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
@@ -77,5 +77,5 @@ module.exports.login = (req, res) => {
       //res.json({ token });
       res.setHeader('Set-Cookie', `token=${token}; HttpOnly`);
     })
-    .catch((error) => sendError(error, res));
+    .catch(next);
 }

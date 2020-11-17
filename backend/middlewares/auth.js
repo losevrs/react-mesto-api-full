@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
+const { ObjectForError } = require('../validation/errors');
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
-
+  //NotAutorisaton
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    return res.status(401).send({ message: 'Отсутствует авторизация' });
+    next(new ObjectForError('NotAutorisaton'));
   }
 
   const token = authorization.replace('Bearer ', '');
@@ -14,7 +15,7 @@ module.exports = (req, res, next) => {
   try {
     payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
-    return res.status(401).send({ message: 'Отсутствует авторизация' });
+    next(new ObjectForError('NotAutorisaton'));
   }
 
   req.user = payload;

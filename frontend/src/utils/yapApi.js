@@ -1,10 +1,10 @@
-const BASE_URL = 'https://auth.nomoreparties.co';
+const BASE_URL = 'http://localhost:3000'; //'https://auth.nomoreparties.co';
 
 const serverRequest = (urlSuffix, method = 'GET', body = undefined, authorization = undefined) => {
   return fetch(BASE_URL + urlSuffix, {
     method: method,
     headers: {
-      'Authorization': authorization,
+      'authorization': authorization,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)

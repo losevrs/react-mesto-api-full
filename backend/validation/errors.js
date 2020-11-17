@@ -8,6 +8,11 @@ const LOGIN_FAILED = {
   message: 'Не верное имя пользователя или пароль.',
 };
 
+const NOT_AUTORISATION = {
+  code: 401,
+  message: 'Отсутствует авторизация.',
+};
+
 const NOT_FOUND_ERROR = {
   code: 404,
   message: 'Обьект не найден.',
@@ -31,6 +36,10 @@ function sendError(error, res) {
     case 'MongoError':
       errorCode = INCORRECT_DBDATA_ERROR.code;
       errorMessage = INCORRECT_DBDATA_ERROR.message;
+      break;
+    case 'NotAutorisation':
+      errorCode = NOT_AUTORISATION.code;
+      errorMessage = NOT_AUTORISATION.message;
       break;
     case 'CastError':
     case 'ValidationError':

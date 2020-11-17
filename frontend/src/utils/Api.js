@@ -4,7 +4,7 @@ class Api {
   }
 
   // Запрос к серверу - по умолчанию GET
-  _serverRequest(urlSuffix, method = 'GET', body = undefined) {
+  _serverRequest(urlSuffix, method = 'GET', body = undefined, authorization = undefined) {
     return fetch(this._options.baseUrl + urlSuffix, {
       method: method,
       headers: {
@@ -53,14 +53,26 @@ class Api {
     return this._serverRequest('cards/likes/' + cardId, metod);
   }
 
+  //Апи авторизации и аутентификации
+  signUp(email, password) {
+    return this._serverRequest('/signup', 'POST', { password, email });
+  }
+
+  signIn(email, password) {
+    return this._serverRequest('/signin', 'POST', { password, email });
+  }
+
+  getUser(token) {
+    return this._serverRequest('/users/me', 'GET', undefined, `Bearer ${token}`);
+  }
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14/',
+  baseUrl: 'http://localhost:3000', // 'https://mesto.nomoreparties.co/v1/cohort-14/',
   headers: {
-    authorization: '44e5d6af-1500-4757-9283-b4dfbe9e13fc',
+    authorization: '', //'44e5d6af-1500-4757-9283-b4dfbe9e13fc',
     'Content-Type': 'application/json'
   }
 });
 
-export {api}
+export { api }
