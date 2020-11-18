@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { isEmail } = require('validator');
+const bcrypt = require('bcryptjs');
 
 const { urlRegExp } = require('../validation/regexpressions');
 const { ObjectForError } = require('../validation/errors');
@@ -50,7 +51,7 @@ userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email }).select('+password')
     .orFail(new ObjectForError('LoginFailed'))
     .then((user) => {
-      bcrypt.compare(password, user.password)
+      return bcrypt.compare(password, user.password)
         .then((match) => {
           if (!match) {
             return Promise.reject(new ObjectForError('LoginFailed'));

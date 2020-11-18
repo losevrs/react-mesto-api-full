@@ -81,8 +81,8 @@ export default () => {
       .then((res) => {
         if (res) {
           const authData = {
-            _id: res.data._id,
-            email: res.data.email,
+            _id: res._id,
+            email: res.email,
             pwd: password
           }
           setAuthData(authData);
