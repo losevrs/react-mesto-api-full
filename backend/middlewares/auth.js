@@ -4,7 +4,7 @@ const { ObjectForError } = require('../validation/errors');
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
-  //NotAutorisaton
+
   if (!authorization || !authorization.startsWith('Bearer ')) {
     next(new ObjectForError('NotAutorisaton'));
   }

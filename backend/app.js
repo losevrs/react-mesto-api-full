@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const { celebrate, Joi, errors } = require('celebrate');
+const { srvLog, errorLog } = require('./middlewares/logger');
 require('dotenv').config();
 
 const usersRouter = require('./routes/users');
@@ -24,21 +26,30 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
-const timeLog = (req, res, next) => {
-  const now = new Date();
-  console.log(now, req.method, req.url);
-  next();
-};
+app.use(srvLog); // Логирование запросов к серверу
 
-app.use(timeLog);
+app.post('/signup', celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required(),
+    password: Joi.string().required().min(8),
+  })
+}), createUser);
 
-app.post('/signup', createUser);
-app.post('/signin', login);
+app.post('/signin', celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required(),
+    password: Joi.string().required().min(8),
+  }) // .unknown(true) - разрешить поля не перечисленные в валидации
+}), login);
 
 app.use(auth);
 
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
+
+app.use(errorLog); // Логирование ошибок
+
+app.use(errors()); // Валидация
 
 app.use((error, req, res, next) => {
   sendError(error, res);

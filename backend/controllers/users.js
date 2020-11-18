@@ -76,6 +76,7 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
       //res.json({ token });
       res.setHeader('Set-Cookie', `token=${token}; HttpOnly`);
+      res.send('Set Cookie');
     })
     .catch(next);
 }

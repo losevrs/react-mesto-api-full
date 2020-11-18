@@ -18,12 +18,15 @@
   },
   "devDependencies": {
     "bcryptjs": "^2.4.3",
+    "celebrate": "^13.0.4",
     "dotenv": "^8.2.0",
     "eslint": "^7.10.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
+    "express-winston": "^4.0.5",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.4",
-    "validator": "^13.1.17"
+    "validator": "^13.1.17",
+    "winston": "^3.3.3"
   }
 }
