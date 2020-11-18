@@ -15,6 +15,8 @@ const { sendError } = require('./validation/errors');
 
 const { PORT = 3000 } = process.env;
 
+const { allowedCors } = require('./validation/allowedCORS');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -27,6 +29,14 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(srvLog); // Логирование запросов к серверу
+
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  next();
+});
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
