@@ -10,7 +10,7 @@ const serverRequest = (urlSuffix, method = 'GET', body = undefined, authorizatio
     body: JSON.stringify(body)
   })
     .then(response => {
-      if (!response) {
+      if (!response.ok) {
         return Promise.reject(`Ошибка выполнения запроса`);
       }
       return response.json();
