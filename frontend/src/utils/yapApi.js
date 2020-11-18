@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000'; //'https://auth.nomoreparties.co';
+const BASE_URL = 'http://api.losevrs.students.nomoreparties.co'; //'https://auth.nomoreparties.co';
 
 const serverRequest = (urlSuffix, method = 'GET', body = undefined, authorization = undefined) => {
   return fetch(BASE_URL + urlSuffix, {
