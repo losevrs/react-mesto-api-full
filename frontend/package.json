@@ -21,7 +21,6 @@
     "startdev": "react-scripts start --mode development",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "eject": "react-scripts eject",
     "predeploy": "react-scripts build",
     "deploy": "scp -r ./build/* rodion@178.154.230.60:/home/rodion/frontrelease"
   },

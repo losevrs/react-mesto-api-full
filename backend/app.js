@@ -17,7 +17,13 @@ const { sendError } = require('./validation/errors');
 const { PORT = 3000 } = process.env;
 
 const app = express();
-app.use(cors());
+
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,13 +35,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(srvLog); // Логирование запросов к серверу
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-//  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-  next();
-});
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
