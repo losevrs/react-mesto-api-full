@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-var cors = require('cors');
+
+const cors = require('cors');
 
 const { celebrate, Joi, errors } = require('celebrate');
 const { srvLog, errorLog } = require('./middlewares/logger');
@@ -9,29 +10,22 @@ require('dotenv').config();
 
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
-
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { sendError } = require('./validation/errors');
 
 const { PORT = 3000 } = process.env;
-
 const app = express();
-
-var corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200
-}
-
-app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
+  useUnifiedTopology: true,
 });
 
 app.use(srvLog); // Логирование запросов к серверу
