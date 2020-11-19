@@ -37,27 +37,23 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const { name, about } = req.body;
+  let updDate = {};
+
+  if (req.body.name) {
+    updDate.name = req.body.name;
+  }
+
+  if (req.body.about) {
+    updDate.about = req.body.about;
+  }
+
+  if (req.body.avatar) {
+    updDate.avatar = req.body.avatar;
+  }
 
   User.findByIdAndUpdate(
     req.user._id,
-    { name, about },
-    {
-      new: true,
-      runValidators: true,
-    },
-  )
-    .orFail(new ObjectForError('ObjectNotFound'))
-    .then((user) => res.json(user))
-    .catch(next);
-};
-
-module.exports.updateAvatar = (req, res, next) => {
-  const { avatar } = req.body;
-
-  User.findByIdAndUpdate(
-    req.user._id,
-    { avatar },
+    updDate,
     {
       new: true,
       runValidators: true,
@@ -74,9 +70,7 @@ module.exports.login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => { // All right, Hristofor Bonifat'evich !!!
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
-      //res.json({ token });
-      res.setHeader('Set-Cookie', `token=${token}; HttpOnly`);
-      res.json(user);
+      res.json({ token });
     })
     .catch(next);
 }

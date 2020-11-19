@@ -9,7 +9,8 @@ import Register from './forms/Register';
 
 import { tokenGet, tokenSet } from '../utils/token';
 import { emailGet, emailSet } from '../utils/userEmail';
-import { getUser, signUp, signIn } from '../utils/yapApi';
+
+import { api } from '../utils/Api';
 
 import { AuthDataContextProvider } from '../contexts/AuthDataContext';
 
@@ -41,12 +42,13 @@ export default () => {
       return;
     }
 
-    getUser(token)
+    api.getUser(token)
       .then((res) => {
         if (res) {
+          console.log(res);
           const authData = {
-            _id: res.data._id,
-            email: res.data.email,
+            _id: res._id,
+            email: res.email,
             pwd: null
           }
           setAuthData(authData);
@@ -62,7 +64,7 @@ export default () => {
   }
 
   const onSubmitLogin = ({ email, password }) => {
-    signIn(email, password)
+    api.signIn(email, password)
       .then((res) => {
         tokenSet(res.token);
         emailSet(email);
@@ -77,7 +79,7 @@ export default () => {
   }
 
   const onSubmitRegister = ({ email, password }) => {
-    signUp(email, password)
+    api.signUp(email, password)
       .then((res) => {
         if (res) {
           const authData = {

@@ -1,3 +1,6 @@
+const { celebrate, Joi } = require('celebrate');
+const { urlRegExp } = require('../validation/regexpressions');
+
 const cardsRouter = require('express').Router();
 const {
   createCard,
@@ -11,10 +14,14 @@ cardsRouter.get('/', getCards);
 
 cardsRouter.delete('/:cardId', deleteCard);
 
-cardsRouter.post('/', createCard);
-
+cardsRouter.delete('/:cardId/likes', dislikeCard);
 cardsRouter.put('/:cardId/likes', likeCard);
 
-cardsRouter.delete('/:cardId/likes', dislikeCard);
+cardsRouter.post('/', celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().min(2).max(30).required(),
+    link: Joi.string().regex(urlRegExp).required(),
+  }).unknown(true)
+}), createCard);
 
 module.exports = cardsRouter;
