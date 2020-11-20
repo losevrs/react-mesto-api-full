@@ -33,10 +33,11 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 app.use(srvLog); // Логирование запросов к серверу
 
 // Крэш для РВ (Потом убрать !!!)
-app.get('/crash-test', () => {
+app.get('/crash-test', (req, res) => {
   setTimeout(() => {
+    res.json({message: "3 сек и падаем"});
     throw new Error('Сервер сейчас упадёт');
-  }, 0);
+  }, 3000);
 });
 
 app.post('/signup', celebrate({
