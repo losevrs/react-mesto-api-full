@@ -1,11 +1,13 @@
 import React from 'react';
 import { Route, Redirect } from "react-router-dom";
 
-export default ({ component: Component, ...props }) => {
+export default (props) => {
   return (
-    <Route>
+    <Route path={props.path}>
       {() => props.loggedIn === true
-        ? <Component {...props} />
+        ? <>
+          {props.children}
+        </>
         : <Redirect to='/sign-in' />
       }
     </Route>
