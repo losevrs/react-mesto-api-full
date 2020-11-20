@@ -78,7 +78,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://api.losevrs.students.nomoreparties.co/',
+  baseUrl: 'http://api.losevrs.students.nomoreparties.co/',
   //baseUrl: 'http://localhost:3000/',
   headers: {
     'Content-Type': 'application/json'
