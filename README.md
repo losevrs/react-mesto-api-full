@@ -16,4 +16,5 @@ yarn build - построение проекта
 
 Задание:
 В этой работе все будет собрано вместе.
-Вот тут будет работа -  .
+Вот тут будет работа - http://www.losevrs.students.nomoreparties.co .
+Соответственно бэк - http://api.losevrs.students.nomoreparties.co .
