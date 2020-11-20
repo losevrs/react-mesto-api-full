@@ -15,6 +15,9 @@ yarn build - построение проекта
 Добавлен Deploy.
 
 Задание:
-В этой работе все будет собрано вместе.
+В этой работе все будет собрано вместе. 
+IP сервера 178.154.230.60 
+
 Вот тут будет работа - http://www.losevrs.students.nomoreparties.co .
+
 Соответственно бэк - http://api.losevrs.students.nomoreparties.co .
