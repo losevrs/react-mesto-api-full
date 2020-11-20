@@ -4,16 +4,10 @@ const { urlRegExp } = require('../validation/regexpressions');
 const usersRouter = require('express').Router();
 const {
   getUser,
-  getUsers,
-  getUserById,
   updateUser,
 } = require('../controllers/users');
 
 usersRouter.get('/me', getUser);
-
-usersRouter.get('/', getUsers);
-
-usersRouter.get('/:id', getUserById);
 
 usersRouter.patch('/me', celebrate({
   body: Joi.object().keys({

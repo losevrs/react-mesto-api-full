@@ -20,21 +20,6 @@ module.exports.getUser = (req, res, next) => {
   .catch(next);
 }
 
-module.exports.getUsers = (req, res, next) => {
-  User.find({})
-    .then((users) => res.json(users))
-    .catch(next);
-};
-
-module.exports.getUserById = (req, res, next) => {
-  const { id } = req.params;
-
-  User.findById(id)
-    .orFail(new ObjectForError('ObjectNotFound'))
-    .then((user) => res.json(user))
-    .catch(next);
-};
-
 module.exports.createUser = (req, res, next) => {
   const { email, password } = req.body;
 
