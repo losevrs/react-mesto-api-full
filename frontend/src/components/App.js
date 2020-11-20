@@ -45,7 +45,6 @@ export default () => {
     api.getUser(token)
       .then((res) => {
         if (res) {
-          console.log(res);
           const authData = {
             _id: res._id,
             email: res.email,

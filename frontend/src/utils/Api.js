@@ -60,7 +60,7 @@ class Api {
   // Лайки
   like(cardId, likeOn = true) {
     const metod = likeOn ? 'PUT' : 'DELETE';
-    return this._serverRequest('cards/likes/' + cardId, metod);
+    return this._serverRequest('cards/' + cardId + '/likes', metod);
   }
 
   //Апи авторизации и аутентификации

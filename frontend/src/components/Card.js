@@ -6,8 +6,8 @@ import { useCurrentUserContext } from '../contexts/CurrentUserContext';
 export default ({card, onCardClick, onCardLike, onCardDelete}) => {
   const currentUser = useCurrentUserContext();
 
-  const canAddDelete = card.owner._id === currentUser._id;
-  const likeShow = card.likes.some((item) => { return item._id === currentUser._id; });
+  const canAddDelete = card.owner === currentUser._id;
+  const likeShow = card.likes.some((id) => { return id === currentUser._id; });
 
   const handleCardClick = () => {
     onCardClick(card);

@@ -47,7 +47,7 @@ export default () => {
   }
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((item) => { return item._id === currentUser._id; });
+    const isLiked = card.likes.some((id) => { return id === currentUser._id; });
 
     api.like(card._id, !isLiked)
       .then((newCard) => {

@@ -6,8 +6,18 @@ const User = require('../models/user');
 
 const { ObjectForError } = require('../validation/errors');
 
-module.exports.getUser = (req, res) => {
-  res.json(req.user);
+module.exports.getUser = (req, res, next) => {
+  if (!req.user) {
+    next(new ObjectForError('NotAutorisation'));
+    return;
+  }
+
+  const id = req.user._id;
+
+  User.findById(id)
+  .orFail(new ObjectForError('ObjectNotFound'))
+  .then((user) => res.json(user))
+  .catch(next);
 }
 
 module.exports.getUsers = (req, res, next) => {
