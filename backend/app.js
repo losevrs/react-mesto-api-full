@@ -35,9 +35,8 @@ app.use(srvLog); // Логирование запросов к серверу
 // Крэш для РВ (Потом убрать !!!)
 app.get('/crash-test', (req, res) => {
   setTimeout(() => {
-    res.json({message: "3 сек и падаем"});
     throw new Error('Сервер сейчас упадёт');
-  }, 3000);
+  }, 0);
 });
 
 app.post('/signup', celebrate({
