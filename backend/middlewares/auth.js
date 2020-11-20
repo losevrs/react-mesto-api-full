@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
-const { JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const { ObjectForError } = require('../validation/errors');
 
@@ -19,7 +19,8 @@ module.exports = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, JWT_SECRET);
+    const secret = NODE_ENV === 'production' ? JWT_SECRET : 'devsecret';
+    payload = jwt.verify(token, secret);
   } catch (err) {
     next(new ObjectForError('NotAutorisation'));
     return;

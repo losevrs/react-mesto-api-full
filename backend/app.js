@@ -9,7 +9,6 @@ const { srvLog, errorLog } = require('./middlewares/logger');
 const auth = require('./middlewares/auth');
 
 require('dotenv').config();
-const { JWT_SECRET } = process.env;
 
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
