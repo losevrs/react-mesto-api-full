@@ -13,9 +13,18 @@ module.exports.createCard = (req, res, next) => {
 module.exports.deleteCard = (req, res, next) => {
   const { cardId } = req.params;
 
-  Card.findByIdAndRemove(cardId)
+  Card.findById(cardId)
     .orFail(new ObjectForError('ObjectNotFound'))
-    .then((cardData) => res.json(cardData))
+    .then((user) => {
+      if (user.owner != req.user._id) {
+        next(new ObjectForError('Forbidden'))
+        return;
+      }
+      Card.findByIdAndRemove(cardId)
+        .orFail(new ObjectForError('ObjectNotFound'))
+        .then((cardData) => res.json(cardData))
+        .catch(next);
+    })
     .catch(next);
 };
 

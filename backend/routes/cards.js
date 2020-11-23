@@ -12,10 +12,23 @@ const {
 
 cardsRouter.get('/', getCards);
 
-cardsRouter.delete('/:cardId', deleteCard);
+cardsRouter.delete('/:cardId', celebrate({
+  params: Joi.object().keys({
+    cardId: Joi.string().required().length(24).hex(),
+  })
+}), deleteCard);
 
-cardsRouter.delete('/:cardId/likes', dislikeCard);
-cardsRouter.put('/:cardId/likes', likeCard);
+cardsRouter.delete('/:cardId/likes', celebrate({
+  params: Joi.object().keys({
+    cardId: Joi.string().required().length(24).hex(),
+  })
+}), dislikeCard);
+
+cardsRouter.put('/:cardId/likes', celebrate({
+  params: Joi.object().keys({
+    cardId: Joi.string().required().length(24).hex(),
+  })
+}), likeCard);
 
 cardsRouter.post('/', celebrate({
   body: Joi.object().keys({

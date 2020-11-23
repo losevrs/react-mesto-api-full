@@ -15,9 +15,9 @@ module.exports.getUser = (req, res, next) => {
   const id = req.user._id;
 
   User.findById(id)
-  .orFail(new ObjectForError('ObjectNotFound'))
-  .then((user) => res.json(user))
-  .catch(next);
+    .orFail(new ObjectForError('ObjectNotFound'))
+    .then((user) => res.json(user))
+    .catch(next);
 }
 
 module.exports.createUser = (req, res, next) => {
@@ -26,7 +26,13 @@ module.exports.createUser = (req, res, next) => {
   bcrypt.hash(password, 10)
     .then((hash) => {
       User.create({ email, password: hash })
-        .then((user) => res.json(user))
+        .then((user) => {
+          const id = user._id;
+          User.findById(id)
+            .orFail(new ObjectForError('ObjectNotFound'))
+            .then((data) => res.json(data))
+            .catch(next);
+        })
         .catch(next)
     });
 };

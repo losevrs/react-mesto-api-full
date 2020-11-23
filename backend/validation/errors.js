@@ -18,6 +18,16 @@ const NOT_FOUND_ERROR = {
   message: 'Обьект не найден.',
 };
 
+const FORBIDDEN_ERROR = {
+  code: 403,
+  message: 'Недостаточно прав.',
+};
+
+const CONFLICT_ERROR = {
+  code: 409,
+  message: 'Конфликт данных.',
+};
+
 const SERVER_ERROR = {
   code: 500,
   message: 'Внутренняя ошибка сервера.',
@@ -33,9 +43,17 @@ function sendError(error, res) {
   let errorMessage = SERVER_ERROR.message;
 
   switch (error.name) {
+    case 'Forbidden':
+      errorCode = FORBIDDEN_ERROR.code;
+      errorMessage = FORBIDDEN_ERROR.message;
+      break;
     case 'MongoError':
       errorCode = INCORRECT_DBDATA_ERROR.code;
       errorMessage = INCORRECT_DBDATA_ERROR.message;
+      if (error.code === 11000) {
+        errorCode = CONFLICT_ERROR.code;
+        errorMessage = CONFLICT_ERROR.message;
+      }
       break;
     case 'NotAutorisation':
       errorCode = NOT_AUTORISATION.code;
