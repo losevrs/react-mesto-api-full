@@ -26,13 +26,7 @@ module.exports.createUser = (req, res, next) => {
   bcrypt.hash(password, 10)
     .then((hash) => {
       User.create({ email, password: hash })
-        .then((user) => {
-          const id = user._id;
-          User.findById(id)
-            .orFail(new ObjectForError('ObjectNotFound'))
-            .then((data) => res.json(data))
-            .catch(next);
-        })
+        .then((user) => res.json(user))
         .catch(next)
     });
 };
